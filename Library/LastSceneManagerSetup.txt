@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Oculus/VR/Scenes/GearVrControllerTest.unity
+- path: Assets/Scenes/BalloonScene.unity
   isLoaded: 1
   isActive: 1

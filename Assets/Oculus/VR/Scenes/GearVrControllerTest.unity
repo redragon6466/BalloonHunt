@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6aa7a9bb8c73743ff8a1c8406a666c95, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.6967767, g: 0.74521244, b: 0.84588295, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400484, guid: 8f313e14d3571404f98c1df49f87da0d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2.46
       objectReference: {fileID: 0}
     - target: {fileID: 400484, guid: 8f313e14d3571404f98c1df49f87da0d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -252,15 +252,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 9c60cb1a438a75241abd5d51a5a2317d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.857
+      value: -0.527
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c60cb1a438a75241abd5d51a5a2317d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.619
+      value: 3.825
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c60cb1a438a75241abd5d51a5a2317d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.112
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9c60cb1a438a75241abd5d51a5a2317d, type: 3}
       propertyPath: m_LocalRotation.x

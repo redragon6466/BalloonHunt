@@ -41,13 +41,24 @@ public class OVRTrackedRemote : MonoBehaviour
 	private bool m_prevControllerConnected = false;
 	private bool m_prevControllerConnectedCached = false;
 
-	void Start()
+    private GameObject genesisBullet;
+    private int timerForFire;
+    private Camera camera;
+    private float machineX;
+    private float machineY;
+    private float machineZ;
+    GameObject lastBullet;
+    int count = 0;
+
+    void Start()
 	{
 		m_isOculusGo = (OVRPlugin.productName == "Oculus Go");
-	}
+        genesisBullet = GameObject.Find("Bullet");
+    }
 
 	void Update()
 	{
+        count++;
 		bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
 
 		if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
@@ -63,5 +74,24 @@ public class OVRTrackedRemote : MonoBehaviour
 		{
 			return;
 		}
+        
+
+        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            if (count > 10)
+            {
+                ShootBullet();
+            }
+        }
 	}
+
+    void ShootBullet()
+    {
+        count = 0;
+        OVRInput.Controller activeController = OVRInput.GetActiveController();
+        Vector3 pos = OVRInput.GetLocalControllerPosition(activeController);
+        Quaternion rot = OVRInput.GetLocalControllerRotation(activeController);
+        lastBullet = GameObject.Instantiate(genesisBullet, pos, rot);
+        lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 500);
+    }
 }
