@@ -1,0 +1,10 @@
+/Builds/Balloon.apk
+/Library/
+/Library/*
+/Temp/*
+/Builds/
+/obj/
+/.vs/Test/v15/.suo
+/.vs/Test/v15/Server/sqlite3/storage.ide
+/.vs/Test/v15/Server/sqlite3/storage.ide-shm
+/.vs/Test/v15/Server/sqlite3/storage.ide-wal
