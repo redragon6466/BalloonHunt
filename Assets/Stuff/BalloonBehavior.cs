@@ -10,7 +10,7 @@ public class BalloonBehavior : MonoBehaviour
     // Use this for initialization
     void Start () {
         force = GetComponent<ConstantForce>();
-        force.force = new Vector3(0, .25F, 0);
+        force.force = new Vector3(0, .15F, 0);
         counter = 0;
     }
     
@@ -25,5 +25,10 @@ public class BalloonBehavior : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this.gameObject);
     }
 }

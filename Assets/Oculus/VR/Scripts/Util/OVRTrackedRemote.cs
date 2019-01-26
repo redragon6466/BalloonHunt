@@ -78,7 +78,7 @@ public class OVRTrackedRemote : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
         {
-            if (count > 30)
+            if (count > 20)
             {
                 ShootBullet();
             }

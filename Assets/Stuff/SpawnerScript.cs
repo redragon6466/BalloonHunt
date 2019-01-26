@@ -48,7 +48,7 @@ public class SpawnerScript : MonoBehaviour {
             //if simple time reaminder is equal to number, spawn balloon
             if (simpleTime % balloonSpawn == 0)
             {
-                var balloon = Instantiate(genesisBalloon, new Vector3(Random.Range(-3F, 3F), 0, Random.Range(3F, 10F)), this.transform.rotation);
+                var balloon = Instantiate(genesisBalloon, new Vector3(Random.Range(-2F, 2F), 0, Random.Range(1F, 4F)), this.transform.rotation);
                 BallonList.Add(balloon);
                 balloon.tag = "Balloon";
                 var mat = balloon.GetComponent<MeshRenderer>();
@@ -65,7 +65,7 @@ public class SpawnerScript : MonoBehaviour {
         }
         if (simpleTime > 1800)
         {
-            EndLevel();
+            //EndLevel();
         }
 
     }
