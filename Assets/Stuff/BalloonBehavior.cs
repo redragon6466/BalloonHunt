@@ -6,15 +6,16 @@ public class BalloonBehavior : MonoBehaviour
 {
     public ConstantForce force;
     public int counter;
-    public const int killZone = 2000;
-    public GameObject particles;
+    public const int killZone = 500;
+    public Object particles;
     public Color balloonColor;
     // Use this for initialization
     void Start () {
         force = GetComponent<ConstantForce>();
         force.force = new Vector3(0, .15F, 0);
         counter = 0;
-        particles = GameObject.Find("BalloonPop");
+        particles = Resources.Load("BalloonPop");
+        balloonColor = this.GetComponent<Renderer>().material.color;
         //var balloonParticle = Instantiate(particles, this.transform, true);
     }
 
@@ -27,22 +28,21 @@ public class BalloonBehavior : MonoBehaviour
             if(this.gameObject.tag == "Balloon")
             {
 
-                BalloonPop();
+                MakeBalloonPop();
             }
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        BalloonPop();
+        MakeBalloonPop();
     }
 
-    private void BalloonPop()
+    private void MakeBalloonPop()
     {
         print("Popping Balloon");
-        var balloonParticle = Instantiate(particles, this.transform.position, this.transform.rotation);
-        var balloonPopParticle = balloonParticle.GetComponent<ParticleSystem>();
-        balloonPopParticle.Play();
+        var balloonParticle = Instantiate( particles, this.transform.position, this.transform.rotation) as GameObject;
+        balloonParticle.GetComponent<ParticleSystem>().startColor = balloonColor;
         Destroy(this.gameObject);
     }
 }

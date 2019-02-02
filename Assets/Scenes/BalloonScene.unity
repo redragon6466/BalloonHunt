@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6967767, g: 0.74521244, b: 0.84588295, a: 1}
+  m_IndirectSpecularColor: {r: 0.6967096, g: 0.74577355, b: 0.8471008, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1072,6 +1072,7 @@ GameObject:
   - component: {fileID: 1594308573}
   - component: {fileID: 1594308576}
   - component: {fileID: 1594308575}
+  - component: {fileID: 1594308572}
   m_Layer: 0
   m_Name: OVRCameraRig
   m_TagString: Untagged
@@ -1079,6 +1080,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1594308572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594308571}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5c0eabe281cc443a4f79b32df4e6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 0
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!4 &1594308573
 Transform:
   m_ObjectHideFlags: 0
@@ -1456,6 +1476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: {fileID: 0}
   counter: 0
+  particles: {fileID: 0}
+  balloonColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &2104129979
 SphereCollider:
   m_ObjectHideFlags: 0

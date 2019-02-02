@@ -7,7 +7,7 @@ public class GunScript : MonoBehaviour
     //set up objects for referencing bullet\
     private GameObject genesisBullet;
     private int timerForFire;
-    private Camera camera;
+    private Camera cameraGun;
     private float machineX;
     private float machineY;
     private float machineZ;
