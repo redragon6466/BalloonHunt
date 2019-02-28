@@ -16,6 +16,7 @@ public class SpawnerScript : MonoBehaviour {
     private Material redBalloon;
     private object[] colors;
     private bool isSpawningBallons;
+    public int score;
     //List of balloon objects that get spawned
     private List<GameObject> BallonList;
 
@@ -50,6 +51,7 @@ public class SpawnerScript : MonoBehaviour {
             {
                 var balloon = Instantiate(genesisBalloon, new Vector3(Random.Range(-2F, 2F), 0, Random.Range(1F, 4F)), this.transform.rotation);
                 BallonList.Add(balloon);
+                balloon.GetComponent<BalloonBehavior>().setMaster(this);
                 balloon.tag = "Balloon";
                 var mat = balloon.GetComponent<MeshRenderer>();
                 Random r = new Random();
@@ -73,7 +75,22 @@ public class SpawnerScript : MonoBehaviour {
     {
         simpleTime += 1;
     }
-    void EndLevel()
+
+    public void NewGame()
+    {
+        machineAccel = 0.05f;
+        simpleTime = 500;
+        numGem = new System.Random();
+        //balloonSpawn = numGem.Next(50, 101);
+        balloonSpawn = 50;
+        genesisBalloon = GameObject.Find("SimpleBalloon");
+        machineLoc = this.transform.position;
+        colors = Resources.LoadAll("/", typeof(Material));
+        BallonList = new List<GameObject>();
+        isSpawningBallons = true;
+    }
+
+    public void CleanUp()
     {
         isSpawningBallons = false;
         foreach (GameObject balloon in BallonList)
@@ -83,10 +100,20 @@ public class SpawnerScript : MonoBehaviour {
         BallonList = new List<GameObject>();
     }
 
+    void EndLevel()
+    {
+        CleanUp();
+    }
+
+    public void ScorePoints(int pointValue)
+    {
+        score += pointValue;
+    }
+
     void OnGUI()
     {
-        //GUIStyle fontSize = new GUIStyle(GUI.skin.GetStyle("label"));
-        //fontSize.fontSize = 24;
-        // GUI.Label(new Rect(20, 20, 300, 50), "Position: " + machineLoc.ToString("F2"), fontSize);
+        GUIStyle fontSize = new GUIStyle(GUI.skin.GetStyle("label"));
+        fontSize.fontSize = 24;
+        GUI.Label(new Rect(20, 20, 300, 50), "Score: " + score, fontSize);
     }
 }
