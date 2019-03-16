@@ -12,6 +12,8 @@ public class GunScript : MonoBehaviour
     private float machineY;
     private float machineZ;
     GameObject lastBullet;
+    private bool _autoFire = false;
+    private PowerUps _power;
     // Use this for initialization
     void Start()
     {
@@ -20,6 +22,12 @@ public class GunScript : MonoBehaviour
         genesisBullet = GameObject.Find("Bullet");
         //camera = Camera.main;
         timerForFire = 0;
+        _power = PowerUps.Normal;
+    }
+
+    public void ChagePowerUp(PowerUps power)
+    {
+        _power = power;
     }
 
     // Update is called once per frame
@@ -31,7 +39,7 @@ public class GunScript : MonoBehaviour
         //check counter
         timerForFire += 1;
         //int shooting = Input.GetButtonDown("Fire1");
-        if (timerForFire > 1 && (Input.GetButtonDown("Fire1") || OVRInput.Get(OVRInput.RawButton.LIndexTrigger)))
+        if (timerForFire > 1 && ((Input.GetButtonDown("Fire1") || OVRInput.Get(OVRInput.RawButton.LIndexTrigger))|| _autoFire))
         {
             timerForFire = 0;
             ShootBullet();
@@ -40,14 +48,67 @@ public class GunScript : MonoBehaviour
 
     void ShootBullet()
     {
+        switch (_power)
+        {
+            case PowerUps.Normal:
+                ShootNormalBullet();
+                break;
+            case PowerUps.TripleFire:
+                ShootNormalBullet();
+                break;
+            case PowerUps.CannonBall:
+                ShootNormalBullet();
+                break;
+        }
+            
+           
+    }
+
+    void ShootNormalBullet()
+    {
+            lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
+            lastBullet.transform.Rotate(new Vector3(270, 0, 0));
+            lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+
+    }
+
+    void ShootTripleBullet()
+    {
+        lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
+        lastBullet.transform.Rotate(new Vector3(250, 0, 0));
+        lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+
         lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
         lastBullet.transform.Rotate(new Vector3(270, 0, 0));
         lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+
+        lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
+        lastBullet.transform.Rotate(new Vector3(290, 0, 0));
+        lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+
+
     }
+
+    void ShootCannonBullet()
+    {
+        lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
+        lastBullet.transform.localScale = new Vector3(2, 2, 2);
+        lastBullet.transform.Rotate(new Vector3(270, 0, 0));
+        lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+
+    }
+
     void OnGUI()
     {
         GUIStyle fontSize = new GUIStyle(GUI.skin.GetStyle("label"));
         fontSize.fontSize = 24;
         GUI.Label(new Rect(20, 20, 300, 50), "Position: " + this.transform.position.ToString("F2"), fontSize);
     }
+}
+
+public enum PowerUps
+{
+    Normal,
+    TripleFire,
+    CannonBall
 }

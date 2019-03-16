@@ -10,6 +10,7 @@ public class BalloonBehavior : MonoBehaviour
     public Object particles;
     public Color balloonColor;
     private SpawnerScript master;
+    private int _score;
     // Use this for initialization
     void Start () {
         force = GetComponent<ConstantForce>();
@@ -17,6 +18,7 @@ public class BalloonBehavior : MonoBehaviour
         counter = 0;
         particles = Resources.Load("BalloonPop");
         balloonColor = this.GetComponent<Renderer>().material.color;
+        _score = 0;
         //var balloonParticle = Instantiate(particles, this.transform, true);
     }
 
@@ -30,7 +32,23 @@ public class BalloonBehavior : MonoBehaviour
             {
 
                 MakeBalloonPop();
+                master.ScorePoints(-1*Score);
             }
+        }
+    }
+
+    /// <summary>
+    /// Number of points the balloon is worth
+    /// </summary>
+    public int Score
+    {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            _score = value;
         }
     }
 
@@ -45,7 +63,7 @@ public class BalloonBehavior : MonoBehaviour
         var balloonParticle = Instantiate( particles, this.transform.position, this.transform.rotation) as GameObject;
         balloonParticle.GetComponent<ParticleSystem>().startColor = balloonColor;
         Destroy(this.gameObject);
-        master.ScorePoints(5);
+        master.ScorePoints(Score);
     }
     public void setMaster(SpawnerScript masterController)
     {
