@@ -12,7 +12,7 @@ public class GunScript : MonoBehaviour
     private float machineY;
     private float machineZ;
     GameObject lastBullet;
-    private bool _autoFire = false;
+    private bool _autoFire = true;
     private PowerUps _power;
     // Use this for initialization
     void Start()
@@ -41,6 +41,7 @@ public class GunScript : MonoBehaviour
         //int shooting = Input.GetButtonDown("Fire1");
         if (timerForFire > 1 && ((Input.GetButtonDown("Fire1") || OVRInput.Get(OVRInput.RawButton.LIndexTrigger))|| _autoFire))
         {
+            print("Pew Pew I'm a Gun");
             timerForFire = 0;
             ShootBullet();
         }
@@ -68,7 +69,7 @@ public class GunScript : MonoBehaviour
     {
             lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
             lastBullet.transform.Rotate(new Vector3(270, 0, 0));
-            lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 50000);
+            lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 5);
 
     }
 
