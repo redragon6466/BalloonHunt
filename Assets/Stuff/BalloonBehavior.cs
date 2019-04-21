@@ -6,7 +6,7 @@ public class BalloonBehavior : MonoBehaviour
 {
     public ConstantForce force;
     public int counter;
-    public const int killZone = 500;
+    public const int killZone = 5000;
     public Object particles;
     public Color balloonColor;
     private SpawnerScript master;
@@ -18,7 +18,7 @@ public class BalloonBehavior : MonoBehaviour
         counter = 0;
         particles = Resources.Load("BalloonPop");
         balloonColor = this.GetComponent<Renderer>().material.color;
-        _score = 0;
+        _score = 1;
         //var balloonParticle = Instantiate(particles, this.transform, true);
     }
 

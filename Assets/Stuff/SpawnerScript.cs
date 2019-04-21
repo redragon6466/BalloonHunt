@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leguar.DotMatrix;
 
 public class SpawnerScript : MonoBehaviour {
     private int simpleTime;
@@ -19,6 +20,10 @@ public class SpawnerScript : MonoBehaviour {
     public int score;
     //List of balloon objects that get spawned
     private List<GameObject> BallonList;
+    //List of Variables/Object References Used for Controlling the scoreboard.
+    private GameObject lotsOfDots;
+    private DotMatrix scoreboard;
+    private Controller controller;
 
 
     // Use this for initialization
@@ -29,10 +34,21 @@ public class SpawnerScript : MonoBehaviour {
         //balloonSpawn = numGem.Next(50, 101);
         balloonSpawn = 50;
         genesisBalloon = GameObject.Find("SimpleBalloon");
+        //Testing Score Stuff
+
+        lotsOfDots = GameObject.Find("DotMatrix_3D");
+        scoreboard = lotsOfDots.GetComponent<DotMatrix>();
+        controller = scoreboard.GetController();
+        TextCommand textCommand = new TextCommand("Score: " + score );
+        controller.AddCommand(textCommand);
+        
+
+        //
         machineLoc = this.transform.position;
         colors = Resources.LoadAll("/", typeof(Material));
         BallonList = new List<GameObject>();
         isSpawningBallons = true;
+
     }
     
     // Update is called once per frame
@@ -109,6 +125,9 @@ public class SpawnerScript : MonoBehaviour {
     public void ScorePoints(int pointValue)
     {
         score += pointValue;
+
+        
+        controller.AddCommand(new TextCommand("Score::" + score));
     }
 
     void OnGUI()
