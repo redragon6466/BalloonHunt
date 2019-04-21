@@ -75,7 +75,7 @@ public class SpawnerScript : MonoBehaviour {
                 var n = Random.Range(0, 7);
                 if (colors != null && colors.Length > 0)
                 {
-                    mat.material = (Material)colors[n];
+                    mat.material = (Material)colors[DetermineBalloonType()];
                 }
 
                 //balloon.transform.Rotate(new Vector3(-90, 0, 0));
@@ -128,6 +128,109 @@ public class SpawnerScript : MonoBehaviour {
 
         
         controller.AddCommand(new TextCommand("Score::" + score));
+    }
+
+    /// <summary>
+    /// Return a value from 0 to 7 which indicates which color baloon to spawn
+    /// y = (x - h)^2 + k
+    /// Try? -(x + 1)^2 + 5
+    /// H is center of x, k is y height
+    /// Load order of balloons Black, Blue, Green, Pink, Red, White, Yellow,
+    /// Proper order is White, Green, Blue, Yellow, Pink, Red, Black
+    /// </summary>
+    /// <returns></returns>
+    public int DetermineBalloonType()
+    {
+        var x = 8000;
+        if (simpleTime < x) //cap prabala at 8k
+        {
+            x = simpleTime;
+        }
+
+        int whiteProb = parabala(1, x / 1000 -1, 5, true); //when simpleTime = 0 h = -1
+        int greenProb = parabala(2, x / 1000 - 1, 5, true);
+        int blueProb = parabala(3, x / 1000 - 1, 5, true);
+        int yellowProb = parabala(4, x / 1000 - 1, 5, true);
+        int pinkProb = parabala(5, x / 1000 - 1, 5, true);
+        int redProb = parabala(6, x / 1000 - 1, 5, true);
+        int blackProb = parabala(7, x / 1000 - 1, 5, true);
+
+        int range = 0;
+
+        // if the balloon colors have a positive 
+        if (whiteProb > 0)
+        {
+            range += whiteProb;
+        }
+        if (greenProb > 0)
+        {
+            range += greenProb;
+        }
+        if (blueProb > 0)
+        {
+            range += blueProb;
+        }
+        if (yellowProb > 0)
+        {
+            range += yellowProb;
+        }
+        if (pinkProb > 0)
+        {
+            range += pinkProb;
+        }
+        if (redProb > 0)
+        {
+            range += redProb;
+        }
+        if (blackProb > 0)
+        {
+            range += blackProb;
+        }
+
+        Random r = new Random();
+        var n = Random.Range(0, range);
+
+        if (n <= whiteProb)
+        {
+            return 5; //white from org order
+        }
+        if (n <= whiteProb + greenProb)
+        {
+            return 2; 
+        }
+        if (n <= whiteProb + greenProb+ blueProb)
+        {
+            return 1; 
+        }
+        if (n <= whiteProb + greenProb + blueProb + yellowProb)
+        {
+            return 6; 
+        }
+        if (n <= whiteProb + greenProb + blueProb + yellowProb + pinkProb)
+        {
+            return 3;
+        }
+        if (n <= whiteProb + greenProb + blueProb + yellowProb + pinkProb + redProb)
+        {
+            return 4;
+        }
+        if (n <= whiteProb + greenProb + blueProb + yellowProb + pinkProb + redProb + blackProb)
+        {
+            return 0;
+        }
+
+        return 5;
+    }
+
+    public int parabala(int x, int h, int k, bool flip)
+    {
+        var q = 1;
+        if (flip)
+        {
+            q = -1;
+        }
+
+        return q * (x - h) ^ 2 + k;
     }
 
     void OnGUI()
