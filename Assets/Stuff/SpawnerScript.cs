@@ -32,7 +32,7 @@ public class SpawnerScript : MonoBehaviour {
         simpleTime = 500;
         numGem = new System.Random();
         //balloonSpawn = numGem.Next(50, 101);
-        balloonSpawn = 50;
+        balloonSpawn = 100;
         genesisBalloon = GameObject.Find("SimpleBalloon");
         //Testing Score Stuff
 
@@ -75,7 +75,9 @@ public class SpawnerScript : MonoBehaviour {
                 var n = Random.Range(0, 7);
                 if (colors != null && colors.Length > 0)
                 {
-                    mat.material = (Material)colors[DetermineBalloonType()];
+                    var type = DetermineBalloonType();
+                    mat.material = (Material)colors[type];
+                    balloon.GetComponent<BalloonBehavior>().Score = GetScore(type);
                 }
 
                 //balloon.transform.Rotate(new Vector3(-90, 0, 0));
@@ -141,19 +143,20 @@ public class SpawnerScript : MonoBehaviour {
     /// <returns></returns>
     public int DetermineBalloonType()
     {
-        var x = 8000;
-        if (simpleTime < x) //cap prabala at 8k
+        var x = 8;
+        var scale = 1000;
+        if (simpleTime / scale < x) //cap prabala at 8
         {
-            x = simpleTime;
+            x = simpleTime / scale;
         }
 
-        int whiteProb = parabala(1, x / 1000 -1, 5, true); //when simpleTime = 0 h = -1
-        int greenProb = parabala(2, x / 1000 - 1, 5, true);
-        int blueProb = parabala(3, x / 1000 - 1, 5, true);
-        int yellowProb = parabala(4, x / 1000 - 1, 5, true);
-        int pinkProb = parabala(5, x / 1000 - 1, 5, true);
-        int redProb = parabala(6, x / 1000 - 1, 5, true);
-        int blackProb = parabala(7, x / 1000 - 1, 5, true);
+        int whiteProb = parabala(1, x, 5, true); //when simpleTime = 0 h = -1
+        int greenProb = parabala(2, x, 5, true);
+        int blueProb = parabala(3, x , 5, true);
+        int yellowProb = parabala(4, x, 5, true);
+        int pinkProb = parabala(5, x  , 5, true);
+        int redProb = parabala(6, x  , 5, true);
+        int blackProb = parabala(7, x  , 5, true);
 
         int range = 0;
 
@@ -184,7 +187,7 @@ public class SpawnerScript : MonoBehaviour {
         }
         if (blackProb > 0)
         {
-            range += blackProb;
+            range += 1; //blacks are hella rare maybe?
         }
 
         Random r = new Random();
@@ -231,6 +234,35 @@ public class SpawnerScript : MonoBehaviour {
         }
 
         return q * (x - h) ^ 2 + k;
+    }
+
+    /// <summary>
+    /// gets score based on type
+    /// Black 250, Blue 25, Green 10, Pink 100, Red 50, White 5, Yellow 50,
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public int GetScore(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return 250;
+            case 1:
+                return 25;
+            case 2:
+                return 10;
+            case 3:
+                return 100;
+            case 4:
+                return 50;
+            case 5:
+                return 5;
+            case 6:
+                return 50;
+            default:
+                return 0;
+        }
     }
 
     void OnGUI()

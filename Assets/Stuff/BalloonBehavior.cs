@@ -28,11 +28,9 @@ public class BalloonBehavior : MonoBehaviour
         counter++;
         if (counter > killZone)
         {
-            if(this.gameObject.tag == "Balloon")
+            if (this.gameObject.tag == "Balloon")
             {
-
-                MakeBalloonPop();
-                master.ScorePoints(-1*Score);
+                MakeBalloonPop(true);
             }
         }
     }
@@ -54,15 +52,20 @@ public class BalloonBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        MakeBalloonPop();
+        MakeBalloonPop(false);
     }
 
-    private void MakeBalloonPop()
+    private void MakeBalloonPop(bool decay)
     {
         print("Popping Balloon");
         var balloonParticle = Instantiate( particles, this.transform.position, this.transform.rotation) as GameObject;
         balloonParticle.GetComponent<ParticleSystem>().startColor = balloonColor;
         Destroy(this.gameObject);
+        if (decay)
+        {
+            master.ScorePoints(Score*-1);
+            return;
+        }
         master.ScorePoints(Score);
     }
     public void setMaster(SpawnerScript masterController)
