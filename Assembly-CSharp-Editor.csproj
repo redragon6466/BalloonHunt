@@ -61,6 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\Display_Editor.cs" />
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\Display3D_Editor.cs" />
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\DisplaySprite_Editor.cs" />
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\DisplayUI_Editor.cs" />
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\DotMatrix_Editor.cs" />
+    <Compile Include="Assets\DotMatrix\Scripts\Internal\Editor\EditorCommon.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\Editor\AudioImportPostProcessor.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\Editor\AudioManagerInspector.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\Editor\MinMaxPropertyDrawer.cs" />

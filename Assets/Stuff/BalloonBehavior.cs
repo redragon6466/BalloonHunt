@@ -18,7 +18,7 @@ public class BalloonBehavior : MonoBehaviour
         counter = 0;
         particles = Resources.Load("BalloonPop");
         balloonColor = this.GetComponent<Renderer>().material.color;
-        _score = 0;
+        _score = 1;
         //var balloonParticle = Instantiate(particles, this.transform, true);
     }
 

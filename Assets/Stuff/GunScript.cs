@@ -39,7 +39,7 @@ public class GunScript : MonoBehaviour
         //check counter
         timerForFire += 1;
         //int shooting = Input.GetButtonDown("Fire1");
-        if (timerForFire > 1 && ((Input.GetButtonDown("Fire1") || OVRInput.Get(OVRInput.RawButton.LIndexTrigger))|| _autoFire))
+        if (timerForFire > 1 && ((Input.GetButtonDown("Fire1") || OVRInput.Get(OVRInput.RawButton.LIndexTrigger))|| _autoFire && timerForFire > 60))
         {
             print("Pew Pew I'm a Gun");
             timerForFire = 0;
@@ -68,6 +68,7 @@ public class GunScript : MonoBehaviour
     void ShootNormalBullet()
     {
             lastBullet = GameObject.Instantiate(genesisBullet, this.transform.position, this.transform.rotation);
+            lastBullet.GetComponent<Bullet_Script>().BulletSettings(300, false);
             lastBullet.transform.Rotate(new Vector3(270, 0, 0));
             lastBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 5);
 
