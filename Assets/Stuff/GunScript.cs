@@ -25,7 +25,7 @@ public class GunScript : MonoBehaviour
         _power = PowerUps.Normal;
     }
 
-    public void ChagePowerUp(PowerUps power)
+    public void ChangePowerUp(PowerUps power)
     {
         _power = power;
     }
