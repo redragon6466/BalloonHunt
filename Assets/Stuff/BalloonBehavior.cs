@@ -7,7 +7,7 @@ public class BalloonBehavior : MonoBehaviour
 {
     public ConstantForce force;
     public int counter;
-    public const int killZone = 5000;
+    public const int killZone = 500;
     public Object particles;
     public Color balloonColor;
     private SpawnerScript master;

@@ -27,27 +27,9 @@ public class SpawnerScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-        machineAccel = 0.05f;
-        simpleTime = 500;
-        numGem = new System.Random();
-        //balloonSpawn = numGem.Next(50, 101);
-        balloonSpawn = 100;
-        genesisBalloon = GameObject.Find("SimpleBalloon");
-        //Testing Score Stuff
-
-        lotsOfDots = GameObject.Find("DotMatrix_3D");
-        scoreboard = lotsOfDots.GetComponent<DotMatrix>();
-        controller = scoreboard.GetController();
-        TextCommand textCommand = new TextCommand("Score: " + score );
-        controller.AddCommand(textCommand);
-        
-
-        //
-        machineLoc = this.transform.position;
-        colors = Resources.LoadAll("/", typeof(Material));
-        BallonList = new List<GameObject>();
-        isSpawningBallons = true;
+    void Start ()
+    {
+        NewGame();
 
     }
     
@@ -101,8 +83,18 @@ public class SpawnerScript : MonoBehaviour {
         simpleTime = 500;
         numGem = new System.Random();
         //balloonSpawn = numGem.Next(50, 101);
-        balloonSpawn = 50;
+        balloonSpawn = 100;
         genesisBalloon = GameObject.Find("SimpleBalloon");
+        //Testing Score Stuff
+
+        lotsOfDots = GameObject.Find("DotMatrix_3D");
+        scoreboard = lotsOfDots.GetComponent<DotMatrix>();
+        controller = scoreboard.GetController();
+        TextCommand textCommand = new TextCommand(score.ToString());
+        controller.AddCommand(textCommand);
+
+
+        //
         machineLoc = this.transform.position;
         colors = Resources.LoadAll("/", typeof(Material));
         BallonList = new List<GameObject>();
@@ -128,8 +120,14 @@ public class SpawnerScript : MonoBehaviour {
     {
         score += pointValue;
 
+
+        if (isSpawningBallons && score < 0)
+        {
+            controller.AddCommand(new TextCommand("Game Over"));
+            CleanUp();
+        }
         
-        controller.AddCommand(new TextCommand("Score::" + score));
+        controller.AddCommand(new TextCommand(score.ToString()));
     }
 
     /// <summary>
@@ -269,6 +267,6 @@ public class SpawnerScript : MonoBehaviour {
     {
         GUIStyle fontSize = new GUIStyle(GUI.skin.GetStyle("label"));
         fontSize.fontSize = 24;
-        GUI.Label(new Rect(20, 20, 300, 50), "Score: " + score, fontSize);
+        GUI.Label(new Rect(20, 20, 400, 50), score.ToString(), fontSize);
     }
 }
