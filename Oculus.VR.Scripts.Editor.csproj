@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{D4C00266-C799-1ED6-CB9D-4FF932C8CF8B}</ProjectGuid>
+    <ProjectGuid>{A3B9BBC9-193C-B9B2-6189-28E8D8BA90E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Oculus.VR.Scripts.Editor</AssemblyName>
