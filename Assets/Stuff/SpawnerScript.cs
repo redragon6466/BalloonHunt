@@ -29,8 +29,6 @@ public class SpawnerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        NewGame();
-
     }
     
     // Update is called once per frame
@@ -114,6 +112,10 @@ public class SpawnerScript : MonoBehaviour {
     void EndLevel()
     {
         CleanUp();
+
+        var startBalloon = GameObject.Find("GameStartBalloon");
+        score = 0;
+        startBalloon.GetComponent<StartGameBalloon>().SetUpForNewGame();
     }
 
     public void ScorePoints(int pointValue)
@@ -124,9 +126,9 @@ public class SpawnerScript : MonoBehaviour {
         if (isSpawningBallons && score < 0)
         {
             controller.AddCommand(new TextCommand("Game Over"));
-            CleanUp();
+            EndLevel();
         }
-        
+
         controller.AddCommand(new TextCommand(score.ToString()));
     }
 

@@ -36,7 +36,7 @@ public class StartGameBalloon : MonoBehaviour
         master.GetComponent<SpawnerScript>().NewGame();
     }
 
-    public void setUpForNewGame()
+    public void SetUpForNewGame()
     {
         visable = 1;
         //master.GetComponent<SpawnerScript>().NewGame();
