@@ -68,7 +68,7 @@ public class SpawnerScript : MonoBehaviour {
                 var balloon = Instantiate(genesisBalloon, new Vector3(Random.Range(-2F, 2F), 0, Random.Range(1F, 4F)), this.transform.rotation);
                 BallonList.Add(balloon);
                 balloon.GetComponent<BalloonBehavior>().setMaster(this);
-                balloon.GetComponent<BalloonBehavior>().Score = 5;
+                //balloon.GetComponent<BalloonBehavior>().Score = 5;
                 balloon.tag = "Balloon";
                 var mat = balloon.GetComponent<MeshRenderer>();
                 Random r = new Random();
