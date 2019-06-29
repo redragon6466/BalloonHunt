@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class BalloonBehavior : MonoBehaviour
     public Color balloonColor;
     private SpawnerScript master;
     private int _score;
+    private System.Guid gUID = System.Guid.NewGuid();
+
     // Use this for initialization
     void Start () {
         force = GetComponent<ConstantForce>();
@@ -18,7 +21,7 @@ public class BalloonBehavior : MonoBehaviour
         counter = 0;
         particles = Resources.Load("BalloonPop");
         balloonColor = this.GetComponent<Renderer>().material.color;
-        _score = 1;
+        //_score = 1;
         //var balloonParticle = Instantiate(particles, this.transform, true);
     }
 
