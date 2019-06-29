@@ -6,11 +6,15 @@ public class StartGameBalloon : MonoBehaviour
 {
     private int visable = 1;
     private GameObject master;
+    private Vector3 startLocation;
+    private GameObject parentObjectBalloon;
     // Start is called before the first frame update
     void Start()
     {
         master = GameObject.Find("Spawner");
-        
+        parentObjectBalloon = GameObject.Find("GameStartBalloon");
+        startLocation = parentObjectBalloon.transform.position;
+
     }
 
     // Update is called once per frame
@@ -31,16 +35,19 @@ public class StartGameBalloon : MonoBehaviour
         //When this hits something, 
         //start a new game, and hid this balloon
         visable = 0;
-        GetComponent<MeshRenderer>().enabled = !GetComponent<MeshRenderer>().enabled;
+        GetComponent<MeshRenderer>().enabled = false;
         //NEED TO ADD CALL ON MASTER TO START NEW GAME
         master.GetComponent<SpawnerScript>().NewGame();
     }
 
     public void SetUpForNewGame()
     {
+        print("SETTING UP FOR NEW GAME");
+        parentObjectBalloon.transform.position = startLocation;
+        parentObjectBalloon.GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
         visable = 1;
         //master.GetComponent<SpawnerScript>().NewGame();
         //Make the ballon visable again.
-        GetComponent<MeshRenderer>().enabled = !GetComponent<MeshRenderer>().enabled;
+        GetComponent<MeshRenderer>().enabled = true;
     }
 }
